@@ -30,8 +30,11 @@ namespace Birlik_API.Controllers
             return Ok(new
             {
                 message = "Inicio de sesión exitoso",
-                user.Usuario,
-                user.Rol
+                usuario = new
+                {
+                    usuario = user.Usuario,
+                    rol = user.Rol
+                }
             });
         }
     }
