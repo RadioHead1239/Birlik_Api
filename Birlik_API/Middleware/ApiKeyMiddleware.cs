@@ -14,13 +14,11 @@
         {
             var expectedApiKey = config["ApiSettings:ApiKey"];
 
-            //  Si no está configurada en appsettings, registrar advertencia
             if (string.IsNullOrEmpty(expectedApiKey))
             {
                 Console.WriteLine("⚠️ No se encontró ApiSettings:ApiKey en appsettings.json");
             }
 
-            //  Capturamos el valor recibido y lo devolvemos como header diagnóstico
             context.Response.OnStarting(() =>
             {
                 var receivedKey = context.Request.Headers.ContainsKey(APIKEY_HEADER)
@@ -32,17 +30,17 @@
 
             if (!context.Request.Headers.TryGetValue(APIKEY_HEADER, out var extractedApiKey))
             {
-                Console.WriteLine("❌ Falta el encabezado de API Key");
+                Console.WriteLine(" Falta el encabezado de API Key");
                 context.Response.StatusCode = 401;
                 await context.Response.WriteAsync("Falta el encabezado de API Key.");
                 return;
             }
 
-            Console.WriteLine($"🔐 Middleware ejecutado: {extractedApiKey}");
+            Console.WriteLine($"Middleware ejecutado: {extractedApiKey}");
 
             if (expectedApiKey != extractedApiKey)
             {
-                Console.WriteLine($"❌ API Key inválida. Esperada: {expectedApiKey} / Recibida: {extractedApiKey}");
+                Console.WriteLine($"API Key inválida. Esperada: {expectedApiKey} / Recibida: {extractedApiKey}");
                 context.Response.StatusCode = 401;
                 await context.Response.WriteAsync("API Key inválida.");
                 return;
