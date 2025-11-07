@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+Birlik_API/appsettings.json
+Birlik_API/appsettings.Development.json
