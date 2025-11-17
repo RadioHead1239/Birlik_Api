@@ -22,7 +22,7 @@ namespace Birlik_Api.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Correo) || string.IsNullOrWhiteSpace(request.PasswordHash))
+                if (string.IsNullOrWhiteSpace(request.Correo) || string.IsNullOrWhiteSpace(request.PasswordHash))
                 return BadRequest(new { message = "Debe ingresar usuario y contraseña" });
 
             var user = _context.DetalleUsuarios

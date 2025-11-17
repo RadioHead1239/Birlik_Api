@@ -19,7 +19,7 @@ namespace Birlik_Api.Controllers
 
         [HttpGet("cliente/{idCliente}")]
 
-        public async Task<IActionResult> ObtenerPolizasConConstanciasAsync(int idCliente)
+        public async Task<IActionResult> ObtenerPolizasConConstanciasAsync(int idCliente, int trazabilidad)
         {
             var poliza = await (from p in _context.Polizas
                                 join r in _context.Ramos on p.FkRamo equals r.IdRamo into ramas
@@ -30,10 +30,13 @@ namespace Birlik_Api.Controllers
                                     on p.IdPoliza equals d.FkPoliza
                                 where p.FkCliente == idCliente
                                       && EF.Functions.Like(d.TituloDocumento, "%Constancia%")
+                                      && EF.Functions.Like(p.EstadoPoliza, "%Renovac%")
+                                      && p.Trazabilidad == trazabilidad   
                                 orderby d.FechaCreacion descending
                                 select new PolizaResponseDTO
                                 {
                                     IdPoliza = p.IdPoliza,
+                                    Trazabilidad = p.Trazabilidad,
                                     NumeroPoliza = p.NumeroPoliza,
                                     NombreRamo = ramo.DescripcionRamo,
                                     NombreCompania = comp.NombreCompaniaSeguro,
@@ -48,8 +51,8 @@ namespace Birlik_Api.Controllers
                            .FirstOrDefaultAsync();
 
             return Ok(poliza);
-
         }
+
 
     }
 }

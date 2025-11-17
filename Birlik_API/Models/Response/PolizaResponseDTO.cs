@@ -12,6 +12,7 @@
         public string? NumeroPoliza { get; set; }
         public string? NombreRamo { get; set; }
         public string? NombreCompania { get; set; }
+        public int? Trazabilidad { get; set; }
         public DateOnly? VigenciaInicio { get; set; }
         public DateOnly? VigenciaFin { get; set; }
         public ConstanciaDTO? Constancia { get; set; }
