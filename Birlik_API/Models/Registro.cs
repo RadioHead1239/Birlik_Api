@@ -1,25 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class Registro
+namespace Birlik.Models.Entities
 {
-    public int IdRegistro { get; set; }
+    public class Registro
+    {
+        [Key]
+        public int Id_Registro { get; set; }
 
-    public string? DescripcionRegistro { get; set; }
+        public string TipoRegistro { get; set; }
 
-    public DateTime? FechaRegistro { get; set; }
+        public string DescripcionRegistro { get; set; }
 
-    public int? FkCliente { get; set; }
+        public DateTime FechaRegistro { get; set; }
 
-    public int? FkPoliza { get; set; }
+        public int Fk_Cliente { get; set; }
 
-    public string? TipoRegistro { get; set; }
+        public int Fk_Poliza { get; set; }
 
-    public string? FkUsuario { get; set; }
+        public int Fk_Cuota { get; set; }
 
-    public string? Estado { get; set; }
+        public string Fk_Usuario { get; set; }
 
-    public int? FkCuota { get; set; }
+        public string Estado { get; set; }
+
+        [NotMapped]
+        public string NombreUsuario { get; set; }
+
+        [NotMapped]
+        public string Imagen { get; set; }
+
+    }
 }

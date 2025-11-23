@@ -1,27 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class Mensaje
+namespace Birlik.Models.Entities
 {
-    public int IdMensaje { get; set; }
+    public class Mensaje
+    {
+        [Key]
+        public int Id_Mensaje { get; set; }
 
-    public DateTime? FechaMensaje { get; set; }
+        public DateTime FechaMensaje { get; set; }
 
-    public string? EstadoMensaje { get; set; }
+        public DateTime FechaLeido { get; set; }
 
-    public string? Usuario { get; set; }
+        public string DescripcionMensaje { get; set; }
 
-    public string? FkUsuario { get; set; }
+        public string EstadoMensaje { get; set; } //Visto - No Visto
 
-    public DateTime? FechaLeido { get; set; }
+        public string Usuario { get; set; }
 
-    public string? NombreMensaje { get; set; }
+        public string Fk_Usuario { get; set; }
 
-    public int? TrazabilidadMensaje { get; set; }
+        public string? ArchivoInformativo { get; set; }
 
-    public string? ArchivoInformativo { get; set; }
+        [NotMapped]
+        [DisplayName("Upload File")]
+        public IFormFile ArchivoInformativo_File { get; set; }
 
-    public string? DescripcionMensaje { get; set; }
+        public string NombreMensaje { get; set; }
+
+        public int TrazabilidadMensaje { get; set; }
+    }
 }

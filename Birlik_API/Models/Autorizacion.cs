@@ -1,23 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class Autorizacion
+namespace Birlik.Models.Entities
 {
-    public int IdAutorizacion { get; set; }
+    public class Autorizacion
+    {
 
-    public string? TipoAutorizacion { get; set; }
+        [Key]
+        public int Id_Autorizacion { get; set; }
 
-    public int? FkPoliza { get; set; }
+        public string TipoAutorizacion { get; set; }
 
-    public string? EstadoAutorizacion { get; set; }
 
-    public DateOnly? FechaAutorizacion { get; set; }
+        public int Fk_Poliza { get; set; }
 
-    public string? FkUsuario { get; set; }
+        public string EstadoAutorizacion { get; set; }
 
-    public int? FkCliente { get; set; }
+        public DateTime FechaAutorizacion { get; set; }
 
-    public int? FkCuota { get; set; }
+        public string Fk_Usuario { get; set; }
+
+        public int Fk_Cliente { get; set; }
+
+        public int Fk_Cuota { get; set; }
+
+    }
 }

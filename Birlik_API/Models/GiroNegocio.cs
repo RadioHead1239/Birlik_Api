@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class GiroNegocio
+namespace Birlik.Models.Entities
 {
-    public int IdGiroNegocio { get; set; }
+    public class GiroNegocio
+    {
+        [Key]
+        public int Id_GiroNegocio { get; set; }
 
-    public string? CodigoGiro { get; set; }
+        [Column(TypeName = "nvarchar(500)")]
+        public string DescripcionGiroNegocio { get; set; }
 
-    public string? EstadoGiro { get; set; }
+        public string CodigoGiro { get; set; }
 
-    public string? DescripcionGiroNegocio { get; set; }
+        public string EstadoGiro { get; set; }
+    }
 }

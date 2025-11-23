@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class SubAgente
+namespace Birlik.Models.Entities
 {
-    public int IdSubAgente { get; set; }
+    public class SubAgente
+    {
+        [Key]
+        public int Id_SubAgente { get; set; }
 
-    public string? DescripcionSubAgente { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        public string DescripcionSubAgente { get; set; }
+    }
 }

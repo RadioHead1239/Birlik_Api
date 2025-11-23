@@ -1,4 +1,4 @@
-﻿using Birlik_Api.Data;
+﻿using Birlik.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +31,7 @@ namespace Birlik_Api.Models.Services
 #else
             var conn = configuration.GetConnectionString("DefaultConnection");
 #endif
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(conn));
         }
 

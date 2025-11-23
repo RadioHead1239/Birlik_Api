@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class TopeRemuneracion
+namespace Birlik.Models.Entities
 {
-    public int IdTopeRemuneracion { get; set; }
+    public class TopeRemuneracion
+    {
+        [Key]
+        public int Id_TopeRemuneracion { get; set; }
 
-    public decimal? SueldoTope { get; set; }
+        public decimal SueldoTope { get; set; }
 
-    public DateOnly? FechaInicioVigencia { get; set; }
+        [DataType(DataType.Date)]// Me va a traer solo la fecha mas no la hora
+        public DateTime FechaInicioVigencia { get; set; }
 
-    public DateOnly? FechaFinVigencia { get; set; }
+        [DataType(DataType.Date)]// Me va a traer solo la fecha mas no la hora
+        public DateTime FechaFinVigencia { get; set; }
 
-    public string? EstadoTopeRemuneracion { get; set; }
+        public string EstadoTopeRemuneracion { get; set; }
+
+
+    }
 }

@@ -1,83 +1,127 @@
-﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class Cliente
+namespace Birlik.Models.Entities
 {
-    public int IdCliente { get; set; }
+    public class Cliente
+    {
+        [Key]
+        public int Id_Cliente { get; set; }
 
-    public string TipoPersona { get; set; } = null!;
+        [Required(ErrorMessage = "Debe seleccionar una opcion")]
+        [Column(TypeName = "nvarchar(50)")]
+        public string TipoPersona { get; set; } //NATURAL - JURIDICO
 
-    public string? NombreTipoPersona { get; set; }
+        [Required(ErrorMessage = "El contratante es obligatorio")]
+        public string NombreTipoPersona { get; set; } // Razon Social - Nombres y Apellidos
 
-    public string? TipoDocumento { get; set; }
+        [Required(ErrorMessage = "Debe seleccionar una opcion")]
+        public string TipoDocumento { get; set; } // DNI/CEDULA - RUC - CEX - PAS
 
-    public string? NumeroDocumento { get; set; }
+        [Required(ErrorMessage = "El numero de documento es obligatorio")]
+        public string NumeroDocumento { get; set; }
 
-    public string? Direccion { get; set; }
+        [Required(ErrorMessage = "La dirección es obligatorio")]
+        public string Direccion { get; set; }
 
-    public string? Distrito { get; set; }
+        [Required(ErrorMessage = "El distrito es obligatorio")]
+        public string Distrito { get; set; } //Distrito - Barrio - Comuna
 
-    public string? Ciudad { get; set; }
+        [Required(ErrorMessage = "La ciudad es obligatorio")]
+        public string Ciudad { get; set; } //Departamento - Ciudad - Region
 
-    public string? Provincia { get; set; }
+        [Required(ErrorMessage = "La provincia es obligatorio")]
+        public string Provincia { get; set; } // Provincia - Region
 
-    public string? Telefono1 { get; set; }
+        [Required(ErrorMessage = "El telefono es obligatorio")]
+        public string Telefono1 { get; set; }
 
-    public string? Telefono2 { get; set; }
+        public string? Telefono2 { get; set; }
 
-    public string? Email { get; set; }
+        [Required(ErrorMessage = "El Email del contratante es obligatorio")]
+        public string Email { get; set; }
 
-    public DateOnly? FechaNacimiento { get; set; }
+        [DataType(DataType.Date)]// Me va a traer solo la fecha mas no la hora
+        [Required(ErrorMessage = "Seleccione una opcion")]
+        public DateTime? FechaNacimiento { get; set; } //Cumpleaños o Aniversarios
 
-    public string? Profesion { get; set; }
+        public string? Profesion { get; set; } //Profesion - Ocupacion
 
-    public DateOnly? VencimientoLicenciaConducir { get; set; }
+        [DataType(DataType.Date)]// Me va a traer solo la fecha mas no la hora
+        public DateTime? VencimientoLicenciaConducir { get; set; }
 
-    public string? Referencia { get; set; }
+        public string? Referencia { get; set; } //De donde lo conoces
 
-    public string? CartaNombramiento { get; set; }
+        [Required(ErrorMessage = "Seleccione una opcion")]
+        public int Fk_Subagente { get; set; } // Otra Tabla: Sub agente - Vendedor (Birlik - Cesar Chero - Denissa Castro )
 
-    public string? Nombres { get; set; }
+        public int Fk_GrupoEconomico { get; set; } // Otra Tabla: Actualmente Ninguno
 
-    public string? EmailContacto { get; set; }
+        public int Fk_GiroNegocio { get; set; } //Otra Tabla: Textil - Ingenieria - Gestion - ETC
 
-    public string? Celular { get; set; }
+        public string? CartaNombramiento { get; set; }
 
-    public string? Observacion { get; set; }
+        public string? DniDocumento { get; set; }
 
-    public DateTime FechaCreacion { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile DniDocumentoFile { get; set; }
 
-    public string? FkUsuario { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile CartaFile { get; set; }
 
-    public string? Notificacion { get; set; }
 
-    public string? Imagen { get; set; }
+        //PERSONA DE CONTACTO
+        [Required(ErrorMessage = "El nombre del contacto es obligatorio")]
+        public string Nombres { get; set; }
+        [Required(ErrorMessage = "El Email del contacto es obligatorio")]
+        public string EmailContacto { get; set; }
+        [Required(ErrorMessage = "El celular del contacto es obligatorio")]
+        public string Celular { get; set; }
 
-    public DateOnly? FechaMaximoFinPoliza { get; set; }
+        public string? Observacion { get; set; }
 
-    public int? NumeroPolizas { get; set; }
 
-    public int? FkSubagente { get; set; }
+        //ingresando el id del usuario
+        public string Fk_usuario { get; set; }
 
-    public int? FkGrupoEconomico { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
-    public int? FkGiroNegocio { get; set; }
+        //AGREGANDO UNA IMAGEN
+        public string? Imagen { get; set; }
 
-    public DateTime FechaAntiguedad { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile ImagenFile { get; set; }
 
-    public string? EjecutivoResponsable { get; set; }
+        //fECHA ANTIGUEDAD CON LA QUE TRABAJA
+        [Required(ErrorMessage = "La fecha es obligatorio")]
+        [DataType(DataType.Date)]// Me va a traer solo la fecha mas no la hora
+        public DateTime? FechaAntiguedad { get; set; }
 
-    public string? EstadoCliente { get; set; }
+        [DataType(DataType.Date)]// Me va a traer solo la fecha mas no la hora
+        public DateTime? FechaMaximoFinPoliza { get; set; }
 
-    public string? EjecutivoProvisional { get; set; }
+        public int NumeroPolizas { get; set; }
 
-    public bool? FacturaXml { get; set; }
+        [Required(ErrorMessage = "Selecciona una opcion")]
+        public string EjecutivoResponsable { get; set; }
 
-    public int? Grupo { get; set; }
+        public string EjecutivoProvisional { get; set; }
 
-    public string? DniDocumento { get; set; }
+        [NotMapped]
+        public string EjecutivoProvisionalNombre { get; set; }
 
-    public virtual ICollection<HistorialCartaNombramiento> HistorialCartaNombramientos { get; set; } = new List<HistorialCartaNombramiento>();
+        public string EstadoCliente { get; set; } //Activo - Desactivo
+
+        [NotMapped]
+        public string ImagenEjecutivo { get; set; }
+
+        public bool FacturaXML { get; set; } //Activo - Desactivo
+
+        public int? Grupo { get; set; }
+
+    }
 }

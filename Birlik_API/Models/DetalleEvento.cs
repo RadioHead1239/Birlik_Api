@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class DetalleEvento
+namespace Birlik.Models.Entities
 {
-    public int IdDetalleEvento { get; set; }
+    public class DetalleEvento
+    {
+        [Key]
+        public int Id_DetalleEvento { get; set; }
 
-    public DateTime? FechaConfirmacion { get; set; }
+        public DateTime? FechaConfirmacion { get; set; }
 
-    public string? FkUsuario { get; set; }
+        public string Fk_Usuario { get; set; }
 
-    public string? RespuestaEvento { get; set; }
+        public int Fk_Evento { get; set; } 
 
-    public int? FkEvento { get; set; }
+        public string? RespuestaEvento {  get; set; }
+
+    }
 }

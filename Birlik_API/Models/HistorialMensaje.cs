@@ -1,25 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class HistorialMensaje
+namespace Birlik.Models.Entities
 {
-    public int IdHistorialMensaje { get; set; }
+    public class HistorialMensaje
+    {
 
-    public string? TipoHistorialMensaje { get; set; }
+        [Key]
+        public int Id_HistorialMensaje { get; set; }
 
-    public DateTime? FechaRegistroHistorialMensaje { get; set; }
+        public string TipoHistorialMensaje { get; set; }
 
-    public int? FkCliente { get; set; }
+        public DateTime FechaRegistroHistorialMensaje { get; set; }
 
-    public string? Usuario { get; set; }
+        public int Fk_Cliente { get; set; }
 
-    public int? FkMensajeEnviado { get; set; }
+        public string Usuario { get; set; }
 
-    public int? FkDetalleUsuario { get; set; }
+        public int Fk_MensajeEnviado { get; set; }
 
-    public int? FkPoliza { get; set; }
+        public int Fk_DetalleUsuario { get; set; }
 
-    public int? FkCuota { get; set; }
+        public int Fk_Poliza { get; set; }
+
+        public int Fk_Cuota { get; set; }
+
+    }
 }

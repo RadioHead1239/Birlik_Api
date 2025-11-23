@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Birlik.Models.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Birlik_Api.Models;

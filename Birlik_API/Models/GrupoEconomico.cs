@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class GrupoEconomico
+namespace Birlik.Models.Entities
 {
-    public int IdGrupoEconomico { get; set; }
+    public class GrupoEconomico
+    {
+        [Key]
+        public int Id_GrupoEconomico { get; set; }
 
-    public string? DescripcionGrupoEconomico { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        public string DescripcionGrupoEconomico { get; set; }
+    }
 }

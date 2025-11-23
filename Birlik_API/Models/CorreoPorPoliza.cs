@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class CorreoPorPoliza
+namespace Birlik.Models.Entities
 {
-    public int IdCorreoPoliza { get; set; }
+    public class CorreoPorPoliza
+    {
 
-    public string? EmailAdicional { get; set; }
+        [Key]
+        public int Id_CorreoPoliza { get; set; }
 
-    public int? FkPoliza { get; set; }
+        public string? EmailAdicional { get; set; }
 
-    public string? TipoCorreoPorPoliza { get; set; }
+        public int Fk_Poliza { get; set; }
+
+        public string TipoCorreoPorPoliza { get; set; } 
+
+    }
 }

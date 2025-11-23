@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class Observacion
+namespace Birlik.Models.Entities
 {
-    public int IdObservacion { get; set; }
+    public class Observacion
+    {
 
-    public string? Categoria { get; set; }
+        [Key]
+        public int Id_Observacion { get; set; }
 
-    public int? FkGlobal { get; set; }
+        public string Categoria { get; set; }
 
-    public string? Tipo { get; set; }
+        public string Comentario { get; set; }
 
-    public string? FkUsuario { get; set; }
+        public string Tipo { get; set; }
 
-    public DateTime? FechaObservacion { get; set; }
+        public string Fk_Usuario { get; set; }
 
-    public string? Comentario { get; set; }
+        public int Fk_Global { get; set; }
+
+        public DateTime FechaObservacion { get; set; }
+
+    }
 }

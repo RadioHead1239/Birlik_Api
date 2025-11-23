@@ -1,39 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
 
-namespace Birlik_Api.Models;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public partial class MensajeEnviado
+namespace Birlik.Models.Entities
 {
-    public int IdMensajeEnviado { get; set; }
+    public class MensajeEnviado
+    {
 
-    public string GeneradoMensajeEnviado { get; set; } = null!;
+        [Key]
+        public int Id_MensajeEnviado { get; set; }
 
-    public string? DescripcionMensajeEnviado { get; set; }
+        public string GeneradoMensajeEnviado { get; set; } //NATURAL - JURIDICO
 
-    public string? AsuntoMensajeEnviado { get; set; }
+        public string DescripcionMensajeEnviado { get; set; } // Razon Social - Nombres y Apellidos
 
-    public string? ParaMensajeEnviado { get; set; }
+        public string AsuntoMensajeEnviado { get; set; } // DNI/CEDULA - RUC - CEX - PAS
 
-    public DateTime FechaRegistroMensajeEnviado { get; set; }
+        public string ParaMensajeEnviado { get; set; }
 
-    public string? EstadoMensaje { get; set; }
+        public string CopiaMensajeEnviado { get; set; }
 
-    public DateTime? FechaProgramada { get; set; }
+        public DateTime FechaRegistroMensajeEnviado { get; set; } //Cumpleaños o Aniversarios
 
-    public string? ImagenMensaje { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile ImagenFile { get; set; }
 
-    public string? Archivo1Mensaje { get; set; }
+        public string? ImagenMensaje { get; set; }
 
-    public string? Archivo2Mensaje { get; set; }
+        public string EstadoMensaje { get; set; }
 
-    public string? Archivo3Mensaje { get; set; }
+        public DateTime? FechaProgramada { get; set; }
 
-    public string? Archivo4Mensaje { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile Archivo1File { get; set; }
 
-    public string? CopiaMensajeEnviado { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile Archivo2File { get; set; }
 
-    public string? ArchivoVisualizar { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile Archivo3File { get; set; }
 
-    public int? FkCliente { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile Archivo4File { get; set; }
+
+        public string? Archivo1Mensaje { get; set; }
+
+        public string? Archivo2Mensaje { get; set; }
+
+        public string? Archivo3Mensaje { get; set; }
+
+        public string? Archivo4Mensaje { get; set; }
+
+
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile ArchivoVisualizarFile { get; set; }
+
+        public string? ArchivoVisualizar { get; set; }
+
+        public int Fk_Cliente { get; set; }
+
+    }
 }

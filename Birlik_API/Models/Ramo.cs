@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class Ramo
+namespace Birlik.Models.Entities
 {
-    public int IdRamo { get; set; }
+    public class Ramo
+    {
+        [Key]
+        public int Id_Ramo { get; set; }
 
-    public string? DescripcionRamo { get; set; }
+        public string DescripcionRamo { get; set; }
 
-    public string? DescripcionCortoRamo { get; set; }
+        public string DescripcionCortoRamo { get; set; }
 
-    public string? EstadoRamo { get; set; }
+        public string EstadoRamo { get; set; } 
+    }
 }

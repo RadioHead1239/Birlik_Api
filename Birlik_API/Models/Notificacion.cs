@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class Notificacion
+namespace Birlik.Models.Entities
 {
-    public int IdNotificacion { get; set; }
+    public class Notificacion
+    {
+        [Key]
+        public int Id_Notificacion { get; set; }
 
-    public DateTime? FechaNotificacion { get; set; }
+        public DateTime FechaNotificacion { get; set; }
 
-    public string? TipoNotificacion { get; set; }
+        public string TipoNotificacion { get; set; } // Registro - Actualizacion - Solicitud
 
-    public string? DescripcionNotificacion { get; set; }
+        public string DescripcionNotificacion { get; set; }
 
-    public string? Usuario { get; set; }
+        public string Usuario { get; set; }
 
-    public string? FkUsuario { get; set; }
+        public string Fk_Usuario { get; set; }
+
+
+    }
 }

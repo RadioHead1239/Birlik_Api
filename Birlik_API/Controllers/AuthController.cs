@@ -1,4 +1,4 @@
-﻿using Birlik_Api.Data;
+﻿using Birlik.Data;
 using Birlik_Api.Models.DTO;
 using Birlik_Api.Models.Response;
 using Birlik_Api.Models.Services;
@@ -10,10 +10,10 @@ namespace Birlik_Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly JwtHelper _jwtHelper;
 
-        public AuthController(AppDbContext context, JwtHelper jwtHelper)
+        public AuthController(ApplicationDbContext context, JwtHelper jwtHelper)
         {
             _context = context;
             _jwtHelper = jwtHelper;
@@ -25,7 +25,7 @@ namespace Birlik_Api.Controllers
                 if (string.IsNullOrWhiteSpace(request.Correo) || string.IsNullOrWhiteSpace(request.PasswordHash))
                 return BadRequest(new { message = "Debe ingresar usuario y contraseña" });
 
-            var user = _context.DetalleUsuarios
+            var user = _context.DetalleUsuario
                 .FirstOrDefault(u => u.Correo == request.Correo && u.ClaveCorreo == request.PasswordHash);
 
             if (user == null)

@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class FirmaElectronica
+namespace Birlik.Models.Entities
 {
-    public int IdFirma { get; set; }
+    public class FirmaElectronica
+    {
+        [Key]
+        public int idFirma { get; set; }
 
-    public DateTime? FechaRegistro { get; set; }
+        public string observacion { get; set; }
 
-    public string? FkUsuario { get; set; }
+        public string fkUsuario { get; set; }
 
-    public string? Observacion { get; set; }
+        public DateTime fechaRegistro { get; set; } 
 
-    public string? Rol { get; set; }
+        public string rol { get; set; }
 
-    public int? FkReporte { get; set; }
+        public int fkReporte { get; set; }
+
+    }
 }

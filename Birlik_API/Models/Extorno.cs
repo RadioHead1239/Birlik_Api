@@ -1,31 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Birlik_Api.Models;
-
-public partial class Extorno
+namespace Birlik.Models.Entities
 {
-    public int IdExtorno { get; set; }
+    public class Extorno
+    {
 
-    public decimal? MontoExtornado { get; set; }
+        [Key]
+        public int Id_Extorno { get; set; }
 
-    public int? FkPoliza { get; set; }
+        public decimal MontoExtornado { get; set; }
 
-    public int? FkCliente { get; set; }
+        public int Fk_Poliza { get; set; }
 
-    public int? FkSeguroDetalle { get; set; }
+        public int Fk_Cliente { get; set; }
 
-    public DateOnly? VigenciaExtorno { get; set; }
+        public int Fk_SeguroDetalle { get; set; }
 
-    public string? NotaDecrito { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime VigenciaExtorno { get; set; }
 
-    public string? CartaDevolucion { get; set; }
+        public DateTime FechaRegistroExtorno { get; set; }
 
-    public string? CartaModeloExclusion { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile NotaDecrito_File { get; set; }
 
-    public string? ComentarioExtorno { get; set; }
+        public string NotaDecrito { get; set; }
 
-    public DateTime? FechaRegistroExtorno { get; set; }
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile CartaDevolucion_File { get; set; }
 
-    public string? FkUsuario { get; set; }
+        public string? CartaDevolucion { get; set; }
+
+        [NotMapped]//NO ES COLUMNA
+        [DisplayName("Upload File")]
+        public IFormFile CartaModeloExclusion_File { get; set; }
+
+        public string? CartaModeloExclusion { get; set; }
+
+        public string? ComentarioExtorno { get; set; }
+
+        public string Fk_usuario { get; set; }
+
+    }
 }

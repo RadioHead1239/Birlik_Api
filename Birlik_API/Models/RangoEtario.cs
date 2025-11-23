@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class RangoEtario
+namespace Birlik.Models.Entities
 {
-    public int IdRangoEtario { get; set; }
+    public class RangoEtario
+    {
 
-    public string? TipoRangoEtario { get; set; }
+        [Key]
+        public int Id_RangoEtario { get; set; }
 
-    public int? Valor1 { get; set; }
+        public string TipoRangoEtario { get; set; }
 
-    public int? Valor2 { get; set; }
+        public string Texto { get; set; }
 
-    public int? FkPoliza { get; set; }
+        public int Valor1 { get; set; }
 
-    public decimal? TasaRangoEtario { get; set; }
+        public int Valor2 { get; set; }
 
-    public string? Texto { get; set; }
+        public int Fk_Poliza { get; set; }
+
+        public decimal TasaRangoEtario { get; set; }
+
+
+    }
 }

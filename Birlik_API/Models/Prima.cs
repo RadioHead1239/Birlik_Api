@@ -1,45 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class Prima
+namespace Birlik.Models.Entities
 {
-    public int IdPrima { get; set; }
+    public class Prima
+    {
+        [Key]
+        public int Id_Prima { get; set; }
 
-    public string? DocumentoPrima { get; set; }
+        public string DocumentoPrima { get; set; }
 
-    public string? FormaPagoPrima { get; set; }
+        public string FormaPagoPrima { get; set; }
 
-    public decimal? SumaAsegurada { get; set; }
+        public decimal SumaAsegurada { get; set; }
 
-    public decimal? ImporteComisionBroker { get; set; }
+        public decimal ImporteComisionBroker { get; set; }
 
-    public decimal? ImporteComisionSubagente { get; set; }
+        public decimal ImporteComisionSubagente { get; set; }
 
-    public decimal? PrimaComercial { get; set; }
+        public decimal PrimaComercial { get; set; }
 
-    public decimal? PrimaNeta { get; set; }
+        public decimal PrimaNeta { get; set; }
 
-    public decimal? PrimaTotal { get; set; }
+        public decimal PrimaTotal { get; set; }
 
-    public decimal? TasaRiesgo { get; set; }
+        public decimal TasaRiesgo { get; set; }
 
-    public int? CantidadCuotas { get; set; }
+        public int Cantidad_Cuotas { get; set; }
 
-    public decimal? ImporteCadaCuota { get; set; }
+        public decimal ImporteCadaCuota { get; set; }
 
-    public int? CodigoPrimeraCuota { get; set; }
+        public int CodigoPrimeraCuota { get; set; }
 
-    public DateOnly? VencimientoPrimeraCuota { get; set; }
 
-    public int? FkCliente { get; set; }
+        [DataType(DataType.Date)]// Me va a traer solo la fecha mas no la hora
+        public DateTime VencimientoPrimeraCuota { get; set; }
 
-    public int? FkPoliza { get; set; }
+        public int Fk_Cliente { get; set; }
 
-    public DateTime? FechaRegistroPrima { get; set; }
+        public int Fk_Poliza { get; set; }
 
-    public string? NumeroConvenio { get; set; }
+        public DateTime FechaRegistroPrima { get; set; }
 
-    public decimal? PrimaMinima { get; set; }
+        public string NumeroConvenio { get; set; }
+
+
+        public decimal? PrimaMinima { get; set; }
+
+
+
+
+    }
 }

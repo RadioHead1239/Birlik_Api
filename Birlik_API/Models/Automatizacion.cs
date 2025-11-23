@@ -1,27 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Birlik_Api.Models;
-
-public partial class Automatizacion
+namespace Birlik.Models.Entities
 {
-    public int IdAutomatizacion { get; set; }
+    public class Automatizacion
+    {
 
-    public string? TipoAutomatizacion { get; set; }
+        [Key]
+        public int Id_Automatizacion { get; set; }
 
-    public string? EstadoAutomatizacion { get; set; }
+        public string TipoAutomatizacion { get; set; }
 
-    public string? Asunto { get; set; }
+        public string DescripcionAutomatizacion { get; set; }
 
-    public string? ConCopia { get; set; }
+        public string EstadoAutomatizacion { get; set; }
 
-    public string? CorreoEmisor { get; set; }
+        public string Asunto { get; set; }
 
-    public string? DescripcionAutomatizacion { get; set; }
+        public string ConCopia { get; set; }
 
-    public string? ObservacionAutomatizacion { get; set; }
+        public string CorreoEmisor { get; set; }
 
-    public string? CabeceraUrl { get; set; }
+        public string ObservacionAutomatizacion { get; set; }
 
-    public string? FirmaCorreo { get; set; }
+        public string CabeceraUrl { get; set; }
+
+        public string FirmaCorreo { get; set; }
+
+
+    }
 }
