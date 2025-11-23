@@ -18,8 +18,7 @@ namespace Birlik_Api.Controllers
         }
 
         [HttpGet("cliente/{idCliente}")]
-        public async Task<ActionResult<IEnumerable<PolizaResponseDTO>>>
-            PolizasxClientexVigenciainicioFkClienteTotales(int idCliente)
+        public async Task<ActionResult<IEnumerable<PolizaResponseDTO>>>PolizasxClientexVigenciainicioFkClienteTotales(int idCliente)
         {
             try
             {
@@ -27,22 +26,26 @@ namespace Birlik_Api.Controllers
                     from pol in _context.Poliza
                         .Where(p => p.Fk_Cliente == idCliente &&
                                     !p.EstadoPoliza.Contains("Inclusion"))
-                    join pri in _context.Prima
-                        on pol.Id_Poliza equals pri.Fk_Poliza
+
+                    join comp in _context.CompaniaSeguro
+                        on pol.FK_Compania equals comp.Id_CompaniaSeguro
+
                     join doc in _context.Documento
                         on pol.Id_Poliza equals doc.Fk_Poliza into docGroup
                     from doc in docGroup
                         .Where(d => d.TituloDocumento.Contains("Constancia"))
                         .DefaultIfEmpty()
+
                     orderby pol.VigenciaInicio descending
+
                     select new PolizaResponseDTO
                     {
                         Id_poliza = pol.Id_Poliza,
                         NumeroPoliza = pol.NumeroPoliza,
-                        ProductoRamo = pol.ProductoRamo,
+                        ProductoRamo = pol.ProductoRamo, //Ramo compañia
                         VigenciaInicio = pol.VigenciaInicio,
                         VigenciaFin = pol.VigenciaFin,
-                        PrimaTotal = pri.PrimaTotal,
+                        NombreCompaniaSeguro = comp.NombreCompaniaSeguro,
                         EsActivo = pol.VigenciaInicio <= DateTime.Now
                                    && pol.VigenciaFin >= DateTime.Now,
                         RutaDocumento = doc != null ? doc.RutaDocumento : null
@@ -57,5 +60,6 @@ namespace Birlik_Api.Controllers
                 return StatusCode(500, $"Error en servidor: {ex.Message}");
             }
         }
+
     }
 }
