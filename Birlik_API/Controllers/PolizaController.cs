@@ -26,8 +26,7 @@ namespace Birlik_Api.Controllers
             {
                 var latestPolicies = db.Poliza
                     .Where(pol => pol.Fk_Cliente == idCliente
-                                  && (pol.EstadoPoliza ?? "").Contains("Inclusion") == false
-
+                                  && !pol.EstadoPoliza.Contains("Inclusion"))
                     .OrderByDescending(pol => pol.VigenciaInicio)
                     .ToList();
 
