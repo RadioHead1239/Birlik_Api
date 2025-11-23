@@ -261,17 +261,7 @@ namespace Birlik.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
-        {
 
-            optionBuilder.UseSqlServer(@"Server=192.168.0.242,1433;Database=bdBirlik;User Id=bzevallos;Password=Peru2025+;MultipleActiveResultSets=true;TrustServerCertificate=True;");
-
-            //CADENA PARA AZURE 2021
-            //optionBuilder.UseSqlServer(@"Server=servbirlik.database.windows.net,1433;Initial Catalog=DbBirlik;Persist Security Info=False;
-            //User ID = maquino; Password=Voluntad1018A.;MultipleActiveResultSets=true; Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;");
-
-
-        }
 
         //------------END MIGUEL
 

@@ -1,5 +1,4 @@
 ﻿using Birlik.Data;
-using Birlik_Api.Models;
 using Birlik_Api.Models.DTO;
 using Birlik_Api.Models.Response;
 using Microsoft.AspNetCore.Mvc;
@@ -17,44 +16,46 @@ namespace Birlik_Api.Controllers
         {
             _context = context;
         }
-            
+
         [HttpGet("cliente/{idCliente}")]
-
-        public IEnumerable<PolizaResponseDTO> PolizasxClientexVigenciainicioFkClienteTotales(int idCliente)
+        public async Task<ActionResult<IEnumerable<PolizaResponseDTO>>>
+            PolizasxClientexVigenciainicioFkClienteTotales(int idCliente)
         {
-            using (var db = new ApplicationDbContext())
+            try
             {
-                var latestPolicies = db.Poliza
-                    .Where(pol => pol.Fk_Cliente == idCliente
-                                  && !pol.EstadoPoliza.Contains("Inclusion"))
-                    .OrderByDescending(pol => pol.VigenciaInicio)
-                    .ToList();
+                var query =
+                    from pol in _context.Poliza
+                        .Where(p => p.Fk_Cliente == idCliente &&
+                                    !p.EstadoPoliza.Contains("Inclusion"))
+                    join pri in _context.Prima
+                        on pol.Id_Poliza equals pri.Fk_Poliza
+                    join doc in _context.Documento
+                        on pol.Id_Poliza equals doc.Fk_Poliza into docGroup
+                    from doc in docGroup
+                        .Where(d => d.TituloDocumento.Contains("Constancia"))
+                        .DefaultIfEmpty()
+                    orderby pol.VigenciaInicio descending
+                    select new PolizaResponseDTO
+                    {
+                        Id_poliza = pol.Id_Poliza,
+                        NumeroPoliza = pol.NumeroPoliza,
+                        ProductoRamo = pol.ProductoRamo,
+                        VigenciaInicio = pol.VigenciaInicio,
+                        VigenciaFin = pol.VigenciaFin,
+                        PrimaTotal = pri.PrimaTotal,
+                        EsActivo = pol.VigenciaInicio <= DateTime.Now
+                                   && pol.VigenciaFin >= DateTime.Now,
+                        RutaDocumento = doc != null ? doc.RutaDocumento : null
+                    };
 
-                var query = from pol in latestPolicies
-                            join pri in db.Prima
-                                on pol.Id_Poliza equals pri.Fk_Poliza
-                            join doc in db.Documento
-                                on pol.Id_Poliza equals doc.Fk_Poliza into docGroup
-                            from doc in docGroup
-                                .Where(d => d.TituloDocumento.Contains("Constancia"))
-                                .DefaultIfEmpty()
-                            select new PolizaResponseDTO
-                            {
-                                Id_poliza = pol.Id_Poliza,
-                                NumeroPoliza = pol.NumeroPoliza,
-                                ProductoRamo = pol.ProductoRamo,
-                                VigenciaInicio = pol.VigenciaInicio,
-                                VigenciaFin = pol.VigenciaFin,
-                                PrimaTotal = pri.PrimaTotal,
-                                EsActivo = pol.VigenciaInicio <= DateTime.Now
-                                           && pol.VigenciaFin >= DateTime.Now,
-                                RutaDocumento = doc != null ? doc.RutaDocumento : null
-                            };
+                var result = await query.ToListAsync();
 
-                return query.ToList();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error en servidor: {ex.Message}");
             }
         }
-
-
     }
 }
