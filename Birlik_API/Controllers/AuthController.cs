@@ -22,7 +22,7 @@ namespace Birlik_Api.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-                if (string.IsNullOrWhiteSpace(request.Correo) || string.IsNullOrWhiteSpace(request.PasswordHash))
+            if (string.IsNullOrWhiteSpace(request.Correo) || string.IsNullOrWhiteSpace(request.PasswordHash))
                 return BadRequest(new { message = "Debe ingresar usuario y contraseña" });
 
             var user = _context.DetalleUsuario
@@ -37,15 +37,24 @@ namespace Birlik_Api.Controllers
                 user.RolUsuario ?? "Usuario"
             );
 
-            var response = new LoginResponse
+            var usuarioDto = new UsuarioDTO
             {
+                Id = user.Id_DetalleUsuario,
                 Correo = user.Correo,
                 Nombre = user.NombreUsuario,
-                Rol = user.RolUsuario,
-                Token = token
+                Rol = user.RolUsuario
+            };
+
+            var response = new LoginResponse
+            {
+                Usuario = usuarioDto,
+                Token = token,
+                Message = "¡Bienvenido!"
             };
 
             return Ok(response);
         }
+
+
     }
 }

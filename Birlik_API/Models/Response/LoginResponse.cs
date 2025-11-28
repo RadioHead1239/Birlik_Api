@@ -1,11 +1,11 @@
-﻿namespace Birlik_Api.Models.Response
+﻿using Birlik_Api.Models.DTO;
+
+namespace Birlik_Api.Models.Response
 {
     public class LoginResponse
     {
-        public string Correo { get; set; }
-        public string Nombre { get; set; }
-        public string Rol { get; set; }
-        public string Token { get; set; }
+        public UsuarioDTO Usuario { get; set; } = new UsuarioDTO();
+        public string Token { get; set; } = string.Empty;
         public string Message { get; set; } = "¡Bienvenido!";
     }
 }
